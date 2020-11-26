@@ -4,14 +4,7 @@ const port = 3001;
 const middleware = require('./middleware');
 const path = require('path');
 const bodyParser = require("body-parser");
-const mongoose = require("mongoose");
-mongoose.connect("mongodb+srv://admin:3EXGWMWeIv1lQ1Pc@twitterclonecluster.o5sla.mongodb.net/TwitterCloneDB?retryWrites=true&w=majority")
-.then(() => {
-    console.log("Database connection successful.");
-})
-.catch((err) => {
-    console.log("Database connection error " + err);
-})
+const mongoose = require("./database");
 
 const server = app.listen(port, () => console.log("Server listening on port " + port));
 
