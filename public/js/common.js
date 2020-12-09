@@ -1,4 +1,4 @@
-$("#postTextArea").keyup(event => {
+$("#postTextarea").keyup(event => {
     var textbox = $(event.target);
     var value = textbox.val().trim();
 
@@ -12,4 +12,17 @@ $("#postTextArea").keyup(event => {
     }
 
     submitButton.prop("disabled", false);
+});
+
+$("#submitPostButton").click(() => {
+    var button = $(event.target);
+    var textbox = $("#postTextarea");
+
+    var data = {
+        content: textbox.val()
+    }
+
+    $.post("/api/posts", data, (postData, status, xhr) => {
+        alert(postData);
+    });
 });
