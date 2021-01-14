@@ -125,7 +125,7 @@ function getPostIdFromElement(element) {
     return postId;
 }
 
-function createPostHtml(postData) {
+function createPostHtml(postData, largeFont = false) {
 
     if(postData == null) return alert("Post Object is null");
 
@@ -146,6 +146,8 @@ function createPostHtml(postData) {
 
     var retweetButtonActiveClass = postData.retweetUsers.includes(userLoggedIn._id) ? "active" : "";
 
+    var largeFontClass = largeFont ? "largeFont" : "";
+
     var retweetText = '';
     if(isRetweet) {
         retweetText = `<span>
@@ -157,7 +159,7 @@ function createPostHtml(postData) {
     var replyFlag = "";
 
     if(postData.replyTo && postData.replyTo._id) {
-        
+
         if(!postData.replyTo._id) {
             return alert("Reply to is not populated");
         } else if(!postData.replyTo.postedBy._id) {
@@ -170,7 +172,7 @@ function createPostHtml(postData) {
                     </div>`
     }
 
-    return `<div class='post' data-id='${postData._id}'>
+    return `<div class='post ${largeFontClass}' data-id='${postData._id}'>
                 <div class='postActionContainer'>
                     ${retweetText}
                 </div>
@@ -275,7 +277,7 @@ function outputPostsWithReplies(results, container) {
         container.append(html);
     }
 
-    var mainPostHtml = createPostHtml(results.postData);
+    var mainPostHtml = createPostHtml(results.postData, true);
     container.append(mainPostHtml);
 
     results.replies.forEach(result => {
