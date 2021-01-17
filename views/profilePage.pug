@@ -8,6 +8,12 @@ block content
             .coverPhotoContainer
                 .userImageContainer
                     img(src=profileUser.profilePic, alt="User Profile Image")
+            .profileButtonsContainer
+                if profileUser != userLoggedIn._id
+                    a.profileButton(href=`/messages/${profileUser._id}`)
+                        i.fas.fa-envelope
+                    +createFollowButton(profileUser, true)
+
         .postsContainer
 
         +createPostModals(userLoggedIn)
