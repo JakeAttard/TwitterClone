@@ -140,16 +140,19 @@ $(document).on("click", ".followButton", (event) => {
     $.ajax({
         url: `/api/users/${userId}/follow`,
         type: "PUT",
-        success: (data) => {
-            console.log(data);
+        success: (data, status, xhr) => {
 
-            // button.find("span").text(postData.retweetUsers.length || "");
+            if(xhr.status == 404) {
+                return;
+            }
 
-            // if(postData.retweetUsers.includes(userLoggedIn._id)) {
-            //     button.addClass("active");
-            // } else {
-            //     button.removeClass("active");
-            // }
+            if(data.following && data.following.includes(userId)) {
+                button.addClass("following");
+                button.text("Following");
+            } else {
+                button.removeClass("following");
+                button.text("Follow");
+            }
         }
     });
 });
